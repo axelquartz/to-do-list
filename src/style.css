@@ -10,3 +10,9 @@
     background-color: yellow;
     margin: 5px 0;
 }
+.checked-task{
+    background-color: green;
+}
+.unchecked-task{
+    background-color: gray;
+}
