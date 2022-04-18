@@ -1,8 +1,12 @@
 import './style.css';
+const NewGroup = require('./createGroup')
+
 
 let tasks = [];
 
 let deletedTasks = [];
+
+
 
 class Task {
     constructor(title, description, dueDate, priority){
@@ -91,6 +95,9 @@ class Task {
     }
 }
 
+
+
+
 function displayPrompt(){
     let taskPrompt = document.querySelector('.task-prompt')
     taskPrompt.style.display = 'block'
@@ -105,3 +112,7 @@ let testButton = document.getElementById('entry');
 testButton.addEventListener('click', function(){
     new Task().createTask()
 });
+
+
+
+export {Task};
