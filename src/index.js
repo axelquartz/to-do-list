@@ -8,7 +8,17 @@ let newGroup = new Array();
 tasks.name = 'tasks'
 deletedTasks.name = 'deletedTasks'
 
+let mainContainer = document.querySelector('.main-container'); // Stays
 
+
+// Create Initial container
+let initialContainer = document.createElement('div');
+initialContainer.classList.add('initial-container')
+mainContainer.appendChild(initialContainer)
+
+// Create group container
+let groupContainer = document.createElement('div');
+groupContainer.classList.add('group-container')
 
 class Task {
     constructor(title, description, dueDate, priority){
@@ -25,7 +35,6 @@ class Task {
         description = document.getElementById('description-value').value;
         dueDate = document.getElementById('date-value').value;
         priority = document.getElementById('priority-value').value;
-        let mainContainer = document.querySelector('.main-container'); // Stays
         
 
         // Push user values to array
@@ -34,12 +43,9 @@ class Task {
         console.log(tasks);
         console.log(tasks.length);
 
-        for(let i = tasks.length - 1; i != tasks.length; i++){
 
-                // Create Initial container
-                let initialContainer = document.createElement('div');
-                initialContainer.classList.add('initial-container')
-                mainContainer.appendChild(initialContainer)
+
+        for(let i = tasks.length - 1; i != tasks.length; i++){
 
                 // Create new taks from DOM
                 let newTask = document.createElement('div') // Stays
@@ -61,9 +67,7 @@ class Task {
                // Create Group Button
                let createGroup = document.getElementById('new-group')
 
-               // Create group container
-               let groupContainer = document.createElement('div');
-               groupContainer.classList.add('group-container')
+               
 
                // Call task DOM elements
                let movedTask = document.createElement('div') // Stays
@@ -112,7 +116,10 @@ class Task {
                     newGroup
                     newGroup.name = 'newGroup' + [i]
                     console.log(`this is i ${i}`);
-
+                    let groupTitle = document.createElement('div')
+                    groupTitle.classList.add('group-title')
+                    groupTitle.innerText = 'Group Title'
+                    groupContainer.append(groupTitle)
                })
 
                 // Switch group 
@@ -149,14 +156,7 @@ class Task {
 
 
 
-// // Create group test function
-// function createGroup(){
-//     let newGroup = new Array();
-//     newGroup.name = 'nameOfArray'
-//     console.log(newGroup);
-//     console.log(newGroup.length);
-//     console.log(tasks);
-// }
+
 
 
 // Display task prompt

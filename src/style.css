@@ -3,11 +3,24 @@
     background-color: purple;
 }
 
+.initial-container{
+    background-color: salmon;
+    border: solid 3px rgb(179, 65, 65);
+
+}
+.group-title{
+    background-color: greenyellow;
+}
+.group-container{
+    background-color: rgb(53, 214, 109);
+    border: solid 3px rgb(0, 106, 11);
+
+}
 
 .new-task{
     /* display: none; */
     padding: 10px;
-    background-color: yellow;
+    background-color: rgb(253, 194, 191);
     margin: 5px 0;
 }
 .checked-task{
@@ -19,7 +32,7 @@
 .moved-task{
     display: none;
     padding: 10px;
-    background-color: rgb(255, 150, 248);
+    background-color: rgb(152, 254, 111);
     margin: 5px 0;
 }
 #switch-group{
