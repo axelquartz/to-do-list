@@ -1,10 +1,12 @@
 import './style.css';
-const NewGroup = require('./createGroup')
 
 
 let tasks = [];
-
 let deletedTasks = [];
+let newGroup = new Array();
+
+tasks.name = 'tasks'
+deletedTasks.name = 'deletedTasks'
 
 
 
@@ -24,30 +26,55 @@ class Task {
         dueDate = document.getElementById('date-value').value;
         priority = document.getElementById('priority-value').value;
         let mainContainer = document.querySelector('.main-container'); // Stays
+        
 
         // Push user values to array
-        tasks.push(new Task(title, description, dueDate, priority))
+        let currentTask = new Task(title, description, dueDate, priority)
+        tasks.push(currentTask)
         console.log(tasks);
         console.log(tasks.length);
 
         for(let i = tasks.length - 1; i != tasks.length; i++){
 
+                // Create Initial container
+                let initialContainer = document.createElement('div');
+                initialContainer.classList.add('initial-container')
+                mainContainer.appendChild(initialContainer)
+
                 // Create new taks from DOM
                 let newTask = document.createElement('div') // Stays
                 newTask.classList.add('new-task') // Stays
-                mainContainer.appendChild(newTask) // Stays
+                initialContainer.appendChild(newTask) // Stays
         
                 // Create new values of each field
                let newTitle = document.createElement('p')
                let newDescription = document.createElement('p')
                let newDueDate = document.createElement('p')
                let newPriority = document.createElement('p')
+              
 
                // Create checkbox
                let checkBox = document.createElement('input');
                checkBox.setAttribute('type', 'checkbox');
                checkBox.classList.add('check-box')
 
+               // Create Group Button
+               let createGroup = document.getElementById('new-group')
+
+               // Create group container
+               let groupContainer = document.createElement('div');
+               groupContainer.classList.add('group-container')
+
+               // Call task DOM elements
+               let movedTask = document.createElement('div') // Stays
+               movedTask.classList.add('moved-task') // Stays
+               mainContainer.appendChild(groupContainer)
+               groupContainer.appendChild(movedTask) // Stays
+               
+
+                // Switch Group Button
+                let switchGroup = document.createElement('button')
+                switchGroup.setAttribute('id', 'switch-group')
 
         
                 // Assign input values to each element
@@ -62,6 +89,7 @@ class Task {
                 newTask.appendChild(newDueDate)
                 newTask.appendChild(newPriority)
                 newTask.appendChild(checkBox)
+                newTask.append(switchGroup)
 
                // Remove task functionality
                checkBox.addEventListener('click', function(){
@@ -78,6 +106,30 @@ class Task {
 
                 }
                })
+
+               // Create Group
+               createGroup.addEventListener('click', function(){
+                    newGroup
+                    newGroup.name = 'newGroup' + [i]
+                    console.log(`this is i ${i}`);
+
+               })
+
+                // Switch group 
+               switchGroup.addEventListener('click', function (){
+                newGroup.push(tasks[i])
+                console.log(newGroup);
+                console.log(newGroup.length);  
+                newTask.style.display = 'none'
+                movedTask.style.display = 'block'
+                // Append new values to new task block
+                movedTask.appendChild(newTitle)
+                movedTask.appendChild(newDescription)
+                movedTask.appendChild(newDueDate)
+                movedTask.appendChild(newPriority)
+                movedTask.appendChild(checkBox)
+                movedTask.append(switchGroup)
+            })
                 
 
                 // Clean input fields
@@ -97,7 +149,17 @@ class Task {
 
 
 
+// // Create group test function
+// function createGroup(){
+//     let newGroup = new Array();
+//     newGroup.name = 'nameOfArray'
+//     console.log(newGroup);
+//     console.log(newGroup.length);
+//     console.log(tasks);
+// }
 
+
+// Display task prompt
 function displayPrompt(){
     let taskPrompt = document.querySelector('.task-prompt')
     taskPrompt.style.display = 'block'
@@ -107,6 +169,7 @@ let buttonDisplay = document.querySelector('.display-prompt');
 
 buttonDisplay.addEventListener('click', displayPrompt)
 
+// Enter task prompt
 let testButton = document.getElementById('entry');
 
 testButton.addEventListener('click', function(){
@@ -114,5 +177,3 @@ testButton.addEventListener('click', function(){
 });
 
 
-
-export {Task};

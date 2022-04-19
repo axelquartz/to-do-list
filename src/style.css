@@ -16,3 +16,12 @@
 .unchecked-task{
     background-color: gray;
 }
+.moved-task{
+    display: none;
+    padding: 10px;
+    background-color: rgb(255, 150, 248);
+    margin: 5px 0;
+}
+#switch-group{
+    padding: 20px;
+}
