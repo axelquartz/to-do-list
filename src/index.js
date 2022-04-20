@@ -20,24 +20,22 @@ let secondaryContainer = document.querySelector('.secondary-container'); // Stay
 
 // Initial class
 class Task {
-    constructor(title, description, dueDate, priority){
+    constructor(title, description, dueDate){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.priority = priority;
 
     }
-    createTask(title, description, dueDate, priority){
+    createTask(title, description, dueDate){
 
         // Define values
         title = document.getElementById('title-value').value;
         description = document.getElementById('description-value').value;
         dueDate = document.getElementById('date-value').value;
-        priority = document.getElementById('priority-value').value;
         
 
         // Push user values to array
-        let currentTask = new Task(title, description, dueDate, priority)
+        let currentTask = new Task(title, description, dueDate)
         tasks.push(currentTask)
         console.log(tasks);
         console.log(tasks.length);
@@ -55,7 +53,6 @@ class Task {
                let newTitle = document.createElement('p')
                let newDescription = document.createElement('p')
                let newDueDate = document.createElement('p')
-               let newPriority = document.createElement('p')
 
                // Create checkbox
                let checkBox = document.createElement('input');
@@ -76,15 +73,25 @@ class Task {
                 newTitle.innerText = title;
                 newDescription.innerText = description;
                 newDueDate.innerText = dueDate;
-                newPriority.innerText = priority;
         
                 // Append new values to new task block
                 newTask.appendChild(newTitle)
                 newTask.appendChild(newDescription)
                 newTask.appendChild(newDueDate)
-                newTask.appendChild(newPriority)
                 newTask.appendChild(checkBox)
                 newTask.append(switchGroup)
+
+                // Hide extended elements
+                newDescription.style.display='none' // Hide description
+                newDueDate.style.display='none' // Hide description
+
+                // Extend task
+                newTask.addEventListener('click', function(){
+                    // Hide extended elements
+                    newDescription.style.display='block' // Hide description
+                    newDueDate.style.display='block' // Hide description
+                })
+
 
                // Remove task functionality (checkbox)
                checkBox.addEventListener('click', function(){
@@ -103,6 +110,8 @@ class Task {
                 }
                })
 
+               'task-prompt'
+
                 // Switch group 
                switchGroup.addEventListener('click', function (){
                 important.push(tasks[i])
@@ -114,7 +123,6 @@ class Task {
                 importantTask.appendChild(newTitle)
                 importantTask.appendChild(newDescription)
                 importantTask.appendChild(newDueDate)
-                importantTask.appendChild(newPriority)
                 importantTask.appendChild(checkBox)
                 importantTask.append(switchGroup)
             })
@@ -126,7 +134,6 @@ class Task {
                 document.getElementById('title-value').value = ''
                 document.getElementById('description-value').value = ''
                 document.getElementById('date-value').value = ''
-                document.getElementById('priority-value').value = ''
 
         }
 
@@ -143,7 +150,7 @@ function displayPrompt(){
     taskPrompt.style.display = 'block'
 }
 
-let buttonDisplay = document.querySelector('.display-prompt');
+let buttonDisplay = document.querySelector('.button-prompt');
 
 buttonDisplay.addEventListener('click', displayPrompt)
 

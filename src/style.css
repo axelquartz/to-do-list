@@ -1,9 +1,37 @@
+:root{
+    background-color: #e5e5e5;
+}
+.display-prompt{
+    display: flex;
+    justify-content: center;
+
+}
+.button-prompt{
+    display: flex;
+    margin: 50px auto;
+    border: solid 2px black;
+}
 .main-container{
     margin: 10px 100px;
 }
 .task-prompt{
     display: none;
-    background-color: purple;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0px 100px;
+    text-align: center;
+    justify-content: center;
+}
+input{
+    margin: 0px 0;
+    border-radius: 5px;
+}
+label{
+    margin: 0px 0;
+}
+#entry{
+    margin: 20px 0;
 }
 h1{
     font-family:'Monument Extended', 'monument';
@@ -13,6 +41,7 @@ h1{
 h2{
     font-family:'Monument Extended', 'monument';
     font-size: medium;
+    text-align: center;
 }
 p{
     font-family:'Monument Extended', 'monument';
@@ -32,11 +61,13 @@ p{
 }
 .new-task{
     /* display: none; */
-    display: flex;
+    display: block;
     padding: 10px;
-    background-color: rgb(253, 194, 191);
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 10px;
     margin: 5px 0;
-    border-radius: 15px;
+    border-radius: 5px;
 }
 .checked-task{
     background-color: green;
@@ -45,10 +76,13 @@ p{
     background-color: gray;
 }
 .important-task{
-    display: none;
+    display: block;
     padding: 10px;
-    background-color: rgb(152, 254, 111);
-    margin: 5px 0;
+    background-color: rgb(255, 152, 138);
+    border-radius: 10px;
+    padding: 10px;
+        margin: 5px 0;
+    border-radius: 5px;
 }
 #switch-group{
     padding: 20px;
