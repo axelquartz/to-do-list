@@ -1,27 +1,42 @@
+.main-container{
+    margin: 10px 100px;
+}
 .task-prompt{
     display: none;
     background-color: purple;
 }
+h1{
+    font-family:'Monument Extended', 'monument';
+    font-size: larger;
+    text-align: center;
+}
+h2{
+    font-family:'Monument Extended', 'monument';
+    font-size: medium;
+}
+p{
+    font-family:'Monument Extended', 'monument';
+    font-size: small;
+}
 
 .initial-container{
-    background-color: salmon;
-    border: solid 3px rgb(179, 65, 65);
-
-}
-.group-title{
-    background-color: greenyellow;
-}
-.group-container{
-    background-color: rgb(53, 214, 109);
-    border: solid 3px rgb(0, 106, 11);
+    /* background-color: salmon;
+    border: solid 3px rgb(179, 65, 65); */
 
 }
 
+.important-container{
+    /* background-color: rgb(53, 214, 109);
+    border: solid 3px rgb(0, 106, 11); */
+
+}
 .new-task{
     /* display: none; */
+    display: flex;
     padding: 10px;
     background-color: rgb(253, 194, 191);
     margin: 5px 0;
+    border-radius: 15px;
 }
 .checked-task{
     background-color: green;
@@ -29,7 +44,7 @@
 .unchecked-task{
     background-color: gray;
 }
-.moved-task{
+.important-task{
     display: none;
     padding: 10px;
     background-color: rgb(152, 254, 111);

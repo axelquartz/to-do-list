@@ -1,25 +1,24 @@
 import './style.css';
 
-
+// Initial arrays
 let tasks = [];
 let deletedTasks = [];
-let newGroup = new Array();
+let important = new Array();
+important.name = 'important'
 
+// Array names
 tasks.name = 'tasks'
 deletedTasks.name = 'deletedTasks'
 
+// Load all containers
 let mainContainer = document.querySelector('.main-container'); // Stays
+let initialContainer = document.querySelector('.initial-container'); // Stays
+let importantContainer = document.querySelector('.important-container'); // Stays
+let secondaryContainer = document.querySelector('.secondary-container'); // Stays
 
 
-// Create Initial container
-let initialContainer = document.createElement('div');
-initialContainer.classList.add('initial-container')
-mainContainer.appendChild(initialContainer)
 
-// Create group container
-let groupContainer = document.createElement('div');
-groupContainer.classList.add('group-container')
-
+// Initial class
 class Task {
     constructor(title, description, dueDate, priority){
         this.title = title;
@@ -57,29 +56,21 @@ class Task {
                let newDescription = document.createElement('p')
                let newDueDate = document.createElement('p')
                let newPriority = document.createElement('p')
-              
 
                // Create checkbox
                let checkBox = document.createElement('input');
                checkBox.setAttribute('type', 'checkbox');
-               checkBox.classList.add('check-box')
-
-               // Create Group Button
-               let createGroup = document.getElementById('new-group')
-
-               
+               checkBox.classList.add('check-box')             
 
                // Call task DOM elements
-               let movedTask = document.createElement('div') // Stays
-               movedTask.classList.add('moved-task') // Stays
-               mainContainer.appendChild(groupContainer)
-               groupContainer.appendChild(movedTask) // Stays
-               
+               let importantTask = document.createElement('div') // Stays
+               importantTask.classList.add('important-task') // Stays
+               mainContainer.appendChild(importantContainer)
+               importantContainer.appendChild(importantTask) // Stays
 
                 // Switch Group Button
                 let switchGroup = document.createElement('button')
                 switchGroup.setAttribute('id', 'switch-group')
-
         
                 // Assign input values to each element
                 newTitle.innerText = title;
@@ -95,12 +86,13 @@ class Task {
                 newTask.appendChild(checkBox)
                 newTask.append(switchGroup)
 
-               // Remove task functionality
+               // Remove task functionality (checkbox)
                checkBox.addEventListener('click', function(){
                 if(checkBox.checked){
                     newTask.classList.add('checked-task')
                     deletedTasks.push(tasks[i])
                     newTask.remove()
+                    importantTask.remove()
                     console.log(`this is i ${i}`);
                     console.log(tasks);
                     console.log(deletedTasks);
@@ -111,32 +103,23 @@ class Task {
                 }
                })
 
-               // Create Group
-               createGroup.addEventListener('click', function(){
-                    newGroup
-                    newGroup.name = 'newGroup' + [i]
-                    console.log(`this is i ${i}`);
-                    let groupTitle = document.createElement('div')
-                    groupTitle.classList.add('group-title')
-                    groupTitle.innerText = 'Group Title'
-                    groupContainer.append(groupTitle)
-               })
-
                 // Switch group 
                switchGroup.addEventListener('click', function (){
-                newGroup.push(tasks[i])
-                console.log(newGroup);
-                console.log(newGroup.length);  
+                important.push(tasks[i])
+                console.log(important);
+                console.log(important.length);  
                 newTask.style.display = 'none'
-                movedTask.style.display = 'block'
+                importantTask.style.display = 'flex'
                 // Append new values to new task block
-                movedTask.appendChild(newTitle)
-                movedTask.appendChild(newDescription)
-                movedTask.appendChild(newDueDate)
-                movedTask.appendChild(newPriority)
-                movedTask.appendChild(checkBox)
-                movedTask.append(switchGroup)
+                importantTask.appendChild(newTitle)
+                importantTask.appendChild(newDescription)
+                importantTask.appendChild(newDueDate)
+                importantTask.appendChild(newPriority)
+                importantTask.appendChild(checkBox)
+                importantTask.append(switchGroup)
             })
+
+
                 
 
                 // Clean input fields
@@ -153,11 +136,6 @@ class Task {
 
     }
 }
-
-
-
-
-
 
 // Display task prompt
 function displayPrompt(){
