@@ -110,21 +110,32 @@ class Task {
                 }
                })
 
-               'task-prompt'
+
 
                 // Switch group 
                switchGroup.addEventListener('click', function (){
+
+                   
+                // Hide extended elements
+      
+
                 important.push(tasks[i])
                 console.log(important);
                 console.log(important.length);  
                 newTask.style.display = 'none'
-                importantTask.style.display = 'flex'
                 // Append new values to new task block
                 importantTask.appendChild(newTitle)
-                importantTask.appendChild(newDescription)
-                importantTask.appendChild(newDueDate)
+                // importantTask.appendChild(newDescription)
+                // importantTask.appendChild(newDueDate)
                 importantTask.appendChild(checkBox)
                 importantTask.append(switchGroup)
+
+            })
+
+            // Extend Important Task elements
+            importantTask.addEventListener('click', function(){
+                importantTask.appendChild(newDescription)
+                importantTask.appendChild(newDueDate)
             })
 
 

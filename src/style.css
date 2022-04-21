@@ -76,7 +76,7 @@ p{
     background-color: gray;
 }
 .important-task{
-    display: block;
+    /* display: block; */
     padding: 10px;
     background-color: rgb(255, 152, 138);
     border-radius: 10px;
