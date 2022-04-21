@@ -34,18 +34,18 @@ label{
     margin: 20px 0;
 }
 h1{
-    font-family:'Monument Extended', 'monument';
+    font-family:'helvetica';
     font-size: larger;
     text-align: center;
 }
 h2{
-    font-family:'Monument Extended', 'monument';
+    font-family:'helvetica';
     font-size: medium;
     text-align: center;
 }
 p{
-    font-family:'Monument Extended', 'monument';
-    font-size: small;
+    font-family:'helvetica';
+    font-size: medium;
 }
 
 .initial-container{
@@ -61,13 +61,30 @@ p{
 }
 .new-task{
     /* display: none; */
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-areas: 'checkbox title title'
+                        'description description description'
+                        'duedate swtich-group switch-group';
     padding: 10px;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
+    text-align: center;
+}
+.new-title{
+    grid-area: title;
+}
+.new-description{
+    grid-area: description;
+}
+.new-due-date{
+    grid-area: duedate;
+}
+.check-box{
+    grid-area: checkbox;
 }
 .checked-task{
     background-color: green;
@@ -81,9 +98,20 @@ p{
     background-color: rgb(255, 152, 138);
     border-radius: 10px;
     padding: 10px;
-        margin: 5px 0;
+    margin: 5px 0;
+    text-align: center;
     border-radius: 5px;
 }
 #switch-group{
-    padding: 20px;
+    font-weight: bold;
+    display: flex;
+    padding: 10px;
+    border: solid 2px black;
+    margin: 0 auto;
+    grid-area: switch-group;
+}
+/* Task elements values */
+.title{
+    background-color: yellow;
+
 }

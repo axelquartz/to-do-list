@@ -50,9 +50,12 @@ class Task {
                 initialContainer.appendChild(newTask) // Stays
         
                 // Create new values of each field
-               let newTitle = document.createElement('p')
+               let newTitle = document.createElement('h2')
+               newTitle.classList.add('new-title')
                let newDescription = document.createElement('p')
+               newDescription.classList.add('new-description')
                let newDueDate = document.createElement('p')
+               newDueDate.classList.add('new-due-date')
 
                // Create checkbox
                let checkBox = document.createElement('input');
@@ -68,6 +71,7 @@ class Task {
                 // Switch Group Button
                 let switchGroup = document.createElement('button')
                 switchGroup.setAttribute('id', 'switch-group')
+                switchGroup.innerText = 'Switch Group'
         
                 // Assign input values to each element
                 newTitle.innerText = title;
@@ -75,15 +79,16 @@ class Task {
                 newDueDate.innerText = dueDate;
         
                 // Append new values to new task block
+                newTask.appendChild(checkBox)
                 newTask.appendChild(newTitle)
                 newTask.appendChild(newDescription)
                 newTask.appendChild(newDueDate)
-                newTask.appendChild(checkBox)
+                
                 newTask.append(switchGroup)
 
-                // Hide extended elements
-                newDescription.style.display='none' // Hide description
-                newDueDate.style.display='none' // Hide description
+                // // Hide extended elements
+                // newDescription.style.display='none' // Hide description
+                // newDueDate.style.display='none' // Hide description
 
                 // Extend task
                 newTask.addEventListener('click', function(){
