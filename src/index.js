@@ -83,18 +83,21 @@ class Task {
                 newTask.appendChild(newTitle)
                 newTask.appendChild(newDescription)
                 newTask.appendChild(newDueDate)
-                
                 newTask.append(switchGroup)
 
-                // // Hide extended elements
-                // newDescription.style.display='none' // Hide description
-                // newDueDate.style.display='none' // Hide description
+                // Hide extended elements
+                newDescription.style.display='none' // Hide description
+                newDueDate.style.display='none' // Hide description
+                switchGroup.style.display='none'
+
 
                 // Extend task
                 newTask.addEventListener('click', function(){
                     // Hide extended elements
                     newDescription.style.display='block' // Hide description
                     newDueDate.style.display='block' // Hide description
+                    switchGroup.style.display='block'
+
                 })
 
 
@@ -133,7 +136,7 @@ class Task {
                 // importantTask.appendChild(newDescription)
                 // importantTask.appendChild(newDueDate)
                 importantTask.appendChild(checkBox)
-                importantTask.append(switchGroup)
+                // importantTask.append(switchGroup)
 
             })
 
@@ -141,6 +144,8 @@ class Task {
             importantTask.addEventListener('click', function(){
                 importantTask.appendChild(newDescription)
                 importantTask.appendChild(newDueDate)
+                importantTask.append(switchGroup)
+
             })
 
 
