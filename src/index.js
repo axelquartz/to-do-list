@@ -14,9 +14,9 @@ deletedTasks.name = 'deletedTasks'
 let mainContainer = document.querySelector('.main-container'); // Stays
 let initialContainer = document.querySelector('.initial-container'); // Stays
 let importantContainer = document.querySelector('.important-container'); // Stays
+let importantTitle = document.querySelector('.important-container>h2')
 let secondaryContainer = document.querySelector('.secondary-container'); // Stays
-
-
+let newTaskTitle = document.querySelector('.initial-container>h2')
 
 // Initial class
 class Task {
@@ -24,7 +24,6 @@ class Task {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-
     }
     createTask(title, description, dueDate){
 
@@ -33,14 +32,11 @@ class Task {
         description = document.getElementById('description-value').value;
         dueDate = document.getElementById('date-value').value;
         
-
         // Push user values to array
         let currentTask = new Task(title, description, dueDate)
         tasks.push(currentTask)
         console.log(tasks);
         console.log(tasks.length);
-
-
 
         for(let i = tasks.length - 1; i != tasks.length; i++){
 
@@ -85,21 +81,34 @@ class Task {
                 newTask.appendChild(newDueDate)
                 newTask.append(switchGroup)
 
+                //Show Initial taskt title
+                newTaskTitle.style.display = 'block'
+
                 // Hide extended elements
                 newDescription.style.display='none' // Hide description
                 newDueDate.style.display='none' // Hide description
                 switchGroup.style.display='none'
 
+                // Hide Important Task
+                importantTask.style.display = 'none'
 
-                // Extend task
+
+                // Extend new task
                 newTask.addEventListener('click', function(){
-                    // Hide extended elements
+
+                if (newDescription.style.display==='none'){
+                    // Show extended elements
                     newDescription.style.display='block' // Hide description
                     newDueDate.style.display='block' // Hide description
                     switchGroup.style.display='block'
-
-                })
-
+                }else if(newDescription.style.display==='block'){
+                    // Hide extended elements
+                    newDescription.style.display='none' // Hide description
+                    newDueDate.style.display='none' // Hide description
+                    switchGroup.style.display='none'
+                };
+               
+                });
 
                // Remove task functionality (checkbox)
                checkBox.addEventListener('click', function(){
@@ -118,26 +127,21 @@ class Task {
                 }
                })
 
-
-
                 // Switch group 
-               switchGroup.addEventListener('click', function (){
-
-                   
+               switchGroup.addEventListener('click', function (){     
                 // Hide extended elements
-      
-
                 important.push(tasks[i])
                 console.log(important);
                 console.log(important.length);  
                 newTask.style.display = 'none'
+                importantTask.style.display = 'grid'
+                importantTitle.style.display = 'block'
                 // Append new values to new task block
                 importantTask.appendChild(newTitle)
                 // importantTask.appendChild(newDescription)
                 // importantTask.appendChild(newDueDate)
                 importantTask.appendChild(checkBox)
                 // importantTask.append(switchGroup)
-
             })
 
             // Extend Important Task elements
@@ -146,10 +150,19 @@ class Task {
                 importantTask.appendChild(newDueDate)
                 importantTask.append(switchGroup)
 
+                if (newDescription.style.display==='none'){
+                    // Show extended elements
+                    newDescription.style.display='block' // Hide description
+                    newDueDate.style.display='block' // Hide description
+                    switchGroup.style.display='block'
+                }else if(newDescription.style.display==='block'){
+                    // Hide extended elements
+                    newDescription.style.display='none' // Hide description
+                    newDueDate.style.display='none' // Hide description
+                    switchGroup.style.display='none'
+                };
+
             })
-
-
-                
 
                 // Clean input fields
                 document.getElementById('title-value').value = ''
@@ -161,7 +174,6 @@ class Task {
         // Hide task prompt
         let taskPrompt = document.querySelector('.task-prompt')
         taskPrompt.style.display = 'none'
-
     }
 }
 
