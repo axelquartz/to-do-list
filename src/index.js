@@ -68,6 +68,8 @@ class Task {
                 let switchGroup = document.createElement('button')
                 switchGroup.setAttribute('id', 'switch-group')
                 switchGroup.innerText = 'Switch Group'
+                switchGroup.classList.add('initial')
+
         
                 // Assign input values to each element
                 newTitle.innerText = title;
@@ -77,92 +79,164 @@ class Task {
                 // Append new values to new task block
                 newTask.appendChild(checkBox)
                 newTask.appendChild(newTitle)
-                newTask.appendChild(newDescription)
                 newTask.appendChild(newDueDate)
+                newTask.appendChild(newDescription)
                 newTask.append(switchGroup)
 
                 //Show Initial taskt title
-                newTaskTitle.style.display = 'block'
+                // newTaskTitle.style.display = 'block'
+                newTaskTitle.classList.add('visible-element')
 
                 // Hide extended elements
-                newDescription.style.display='none' // Hide description
-                newDueDate.style.display='none' // Hide description
-                switchGroup.style.display='none'
+                // newDescription.style.display='none' // Hide description
+                newDescription.classList.remove('visible-element')
+                newDescription.classList.add('removed-element')
+                // switchGroup.style.display='none'
+                switchGroup.classList.remove('visible-element')
+                switchGroup.classList.add('removed-element')
+
 
                 // Hide Important Task
-                importantTask.style.display = 'none'
+                // importantTask.style.display = 'none'
+                importantTask.classList.add('removed-task')
+
+
 
 
                 // Extend new task
-                newTask.addEventListener('click', function(){
+                    newTask.addEventListener('click', function (){
+                        // If is closed
+                        if (newDescription.style.display='none' || newDescription === null){
 
-                if (newDescription.style.display==='none'){
-                    // Show extended elements
-                    newDescription.style.display='block' // Hide description
-                    newDueDate.style.display='block' // Hide description
-                    switchGroup.style.display='block'
-                }else if(newDescription.style.display==='block'){
-                    // Hide extended elements
-                    newDescription.style.display='none' // Hide description
-                    newDueDate.style.display='none' // Hide description
-                    switchGroup.style.display='none'
-                };
-               
+                            console.log('click expand');
+                            newTask.style.backgroundColor = 'purple'
+                            newTask.appendChild(newDescription)
+                            newTask.append(switchGroup)
+                            // Show extended elements
+                            // newDescription.style.display='block' // Hide description
+                            newDescription.classList.add('visible-element')
+                            // newDueDate.style.display='block' // Hide description
+                            newDueDate.classList.add('visible-element')
+                            // switchGroup.style.display='block'
+                            switchGroup.classList.add('visible-element')
+
+                        // If is opened
+                        }else if(newDescription.classList.contains('visible-element')){
+
+                            newTask.style.backgroundColor = 'pink'
+
+                            // Hide extended elements
+                            // newDescription.style.display='none' // Hide description
+                            newDescription.classList.remove('visible-element')
+                            newDescription.classList.add('removed-element')
+                            // switchGroup.style.display='none'
+                            switchGroup.classList.remove('visible-element')
+                            switchGroup.classList.add('removed-element')
+                        };
+                       
+                        });
+
+
+                    // Extend Important Task elements
+                    importantTask.addEventListener('click', function(){
+
+                    importantTask.appendChild(newDescription)
+                    importantTask.append(switchGroup)
+    
+                    if (importantTask.style.display = 'grid'){
+                        // Show extended elements
+                        newTask.style.backgroundColor = 'orange'
+                        importantTask.style.backgroundColor = 'orange'
+
+                        // newDescription.style.display='block' // Hide description
+                        newDescription.classList.remove('removed-element')
+                        newDescription.classList.add('visible-element')
+                        // newDueDate.style.display='block' // Hide description
+                        newDueDate.classList.remove('removed-element')
+                        newDueDate.classList.add('visible-element')
+                        // switchGroup.style.display='block'
+                        switchGroup.classList.remove('removed-element')
+                        switchGroup.classList.add('visible-element')
+
+                    // Important Task is Opened
+                    }else if(newDescription.classList.contains('visible-element')){
+                        // Hide extended elements
+                        newTask.style.backgroundColor = 'red'
+
+                        // newDescription.style.display='none' // Hide description
+                        newDescription.classList.remove('visible-element')
+                        newDescription.classList.add('removed-element')
+                        // switchGroup.style.display='none'
+                        switchGroup.classList.remove('visible-element')
+                        switchGroup.classList.add('removed-element')
+                    };
+    
                 });
+                
+
+                    // Switch group 
+                    switchGroup.addEventListener('click', function (){   
+
+                        if(switchGroup.classList.contains('important')){
+                            console.log('Initial Task');
+                            switchGroup.classList.remove('important')
+                            switchGroup.classList.add('initial')
+                            switchGroup.remove()
+                            newDescription.remove()
+                            newTask.style.display = 'grid'
+                            importantTask.classList.remove('important-task')
+                            importantTask.classList.add('removed-task')
+                            mainContainer.style.backgroundColor = 'blue'
+                            // importantTask.style.display = 'none'
+
+                            newTask.appendChild(newTitle)
+                            newTask.appendChild(newDueDate)
+                            newTask.appendChild(checkBox)
+
+                        }else if(switchGroup.classList.contains('initial')){
+                            mainContainer.style.backgroundColor = 'green'
+                            console.log('Important Task');
+                            important.push(tasks[i])
+                            console.log(important);
+                            console.log(important.length);  
+                            switchGroup.classList.remove('initial')
+                            switchGroup.classList.add('important')
+                            newTask.style.display = 'none'
+                            newTask.classList.add('removed-task')
+                            importantTask.style.display = 'grid'
+                            importantTask.classList.add('important-task')
+                            // importantTitle.style.display = 'block'
+                            // Append new values to new task block
+                            importantTask.appendChild(newTitle)
+                            // importantTask.appendChild(newDescription)
+                            importantTask.appendChild(newDueDate)
+                            importantTask.appendChild(checkBox)
+                            // importantTask.append(switchGroup)
+
+                        }
+                               
+        
+                    })
 
                // Remove task functionality (checkbox)
                checkBox.addEventListener('click', function(){
                 if(checkBox.checked){
                     newTask.classList.add('checked-task')
+                    importantTask.classList.add('checked-task')
                     deletedTasks.push(tasks[i])
-                    newTask.remove()
-                    importantTask.remove()
+                    // newTask.remove()
+                    // importantTask.remove()
                     console.log(`this is i ${i}`);
                     console.log(tasks);
                     console.log(deletedTasks);
+
+                    
                 }else{
                     console.log('Not checked bitch');
                     newTask.classList.add('unchecked-task')
 
                 }
                })
-
-                // Switch group 
-               switchGroup.addEventListener('click', function (){     
-                // Hide extended elements
-                important.push(tasks[i])
-                console.log(important);
-                console.log(important.length);  
-                newTask.style.display = 'none'
-                importantTask.style.display = 'grid'
-                importantTitle.style.display = 'block'
-                // Append new values to new task block
-                importantTask.appendChild(newTitle)
-                // importantTask.appendChild(newDescription)
-                // importantTask.appendChild(newDueDate)
-                importantTask.appendChild(checkBox)
-                // importantTask.append(switchGroup)
-            })
-
-            // Extend Important Task elements
-            importantTask.addEventListener('click', function(){
-                importantTask.appendChild(newDescription)
-                importantTask.appendChild(newDueDate)
-                importantTask.append(switchGroup)
-
-                if (newDescription.style.display==='none'){
-                    // Show extended elements
-                    newDescription.style.display='block' // Hide description
-                    newDueDate.style.display='block' // Hide description
-                    switchGroup.style.display='block'
-                }else if(newDescription.style.display==='block'){
-                    // Hide extended elements
-                    newDescription.style.display='none' // Hide description
-                    newDueDate.style.display='none' // Hide description
-                    switchGroup.style.display='none'
-                };
-
-            })
 
                 // Clean input fields
                 document.getElementById('title-value').value = ''

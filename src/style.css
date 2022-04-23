@@ -74,9 +74,9 @@ p{
     display: grid;
     justify-content: space-around;
     grid-template-columns: 80px auto auto;
-    grid-template-areas: 'checkbox title title'
-                        'description description description'
-                        'duedate swtich-group switch-group';
+    grid-template-areas: 'checkbox title title duedate'
+                        'description description description .'
+                        'description description description switch-group';
     padding: 10px;
     gap: 10px;
     background-color: rgb(255, 255, 255);
@@ -109,8 +109,7 @@ p{
 
     margin: auto;
 }
-.checked-task{
-}
+
 .unchecked-task{
     background-color: gray;
 }
@@ -119,9 +118,9 @@ p{
     display: grid;
     justify-content: space-around;
     grid-template-columns: 80px auto auto;
-    grid-template-areas: 'checkbox title title'
-                        'description description description'
-                        'duedate swtich-group switch-group';
+    grid-template-areas: 'checkbox title title duedate'
+                         'description description description .'
+                         'description description description switch-group';
     padding: 10px;
     gap: 10px;
     background-color: rgb(255, 255, 255);
@@ -129,7 +128,33 @@ p{
     margin: 5px 0;
     text-align: center;
     border-radius: 5px;
-    border-bottom: solid 4px #3e830a;
+    border-bottom: solid 8px #3e830a;
+}
+.removed-task{
+    display: none;
+}
+.visible-element{
+    display: block;
+}
+.removed-element{
+    display: none;
+}
+.checked-task{
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: 80px auto auto;
+    grid-template-areas: 'checkbox title title duedate'
+                        'description description description .'
+                        'description description description switch-group';
+    padding: 10px;
+    gap: 10px;
+    background-color: rgb(111, 111, 111);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-align: center;
+    border-bottom: solid 8px #bfbfbf;
 }
 .important-container>h2{
     display: none;
