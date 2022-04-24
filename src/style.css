@@ -73,10 +73,25 @@ p{
     /* display: none; */
     display: grid;
     justify-content: space-around;
-    grid-template-columns: 80px auto auto;
-    grid-template-areas: 'checkbox title title duedate'
-                        'description description description .'
-                        'description description description switch-group';
+    grid-template-columns: 80px auto auto auto 80px;
+    grid-template-areas: 'checkbox title title duedate expand-new'
+                        'description description description description .'
+                        'description description description description switch-group';
+    padding: 10px;
+    gap: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-align: center;
+    border-bottom: solid 8px #bfbfbf;
+}
+.new-task-shrinked{
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: 80px auto auto auto 80px;
+    grid-template-areas: 'checkbox title title duedate expand-new';
     padding: 10px;
     gap: 10px;
     background-color: rgb(255, 255, 255);
@@ -86,7 +101,6 @@ p{
     border-radius: 5px;
     text-align: center;
     border-bottom: solid 4px #bfbfbf;
-
 }
 .new-title{
     grid-area: title;
@@ -117,10 +131,26 @@ p{
     /* display: block; */
     display: grid;
     justify-content: space-around;
-    grid-template-columns: 80px auto auto;
-    grid-template-areas: 'checkbox title title duedate'
-                         'description description description .'
-                         'description description description switch-group';
+    grid-template-columns: 80px auto auto auto 80px;
+    grid-template-areas: 'checkbox title title duedate expand-important'
+                        'description description description description .'
+                        'description description description description switch-group';
+    padding: 10px;
+    gap: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-align: center;
+    border-bottom: solid 8px #7df552;
+}
+.important-task-shrinked{
+    /* display: block; */
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: 80px auto auto auto 80px;
+    grid-template-areas: 'checkbox title title duedate expand-important';
     padding: 10px;
     gap: 10px;
     background-color: rgb(255, 255, 255);
@@ -143,9 +173,9 @@ p{
     display: grid;
     justify-content: space-around;
     grid-template-columns: 80px auto auto;
-    grid-template-areas: 'checkbox title title duedate'
-                        'description description description .'
-                        'description description description switch-group';
+    grid-template-areas: 'checkbox title title duedate expand-important'
+                        'description description description description .'
+                        'description description description description switch-group';
     padding: 10px;
     gap: 10px;
     background-color: rgb(111, 111, 111);
@@ -159,6 +189,16 @@ p{
 .important-container>h2{
     display: none;
     color: #3e830a;
+}
+.expand-new{
+    padding: 20px;
+    background-color: rgb(48, 48, 48);
+    grid-area: expand-new;
+}
+.expand-important{
+    padding: 20px;
+    background-color: rgb(139, 255, 51);
+    grid-area: expand-important;
 }
 #switch-group{
     justify-self: end;

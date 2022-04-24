@@ -35,14 +35,19 @@ class Task {
         // Push user values to array
         let currentTask = new Task(title, description, dueDate)
         tasks.push(currentTask)
+        
         console.log(tasks);
         console.log(tasks.length);
 
         for(let i = tasks.length - 1; i != tasks.length; i++){
 
+                important.push(tasks[i])
+                deletedTasks.push(tasks[i])
+
+
                 // Create new taks from DOM
                 let newTask = document.createElement('div') // Stays
-                newTask.classList.add('new-task') // Stays
+                newTask.classList.add('new-task-shrinked') // Stays
                 initialContainer.appendChild(newTask) // Stays
         
                 // Create new values of each field
@@ -56,7 +61,15 @@ class Task {
                // Create checkbox
                let checkBox = document.createElement('input');
                checkBox.setAttribute('type', 'checkbox');
-               checkBox.classList.add('check-box')             
+               checkBox.classList.add('check-box')     
+               
+               // Create expand button for New Task
+               let expandNew = document.createElement('button')
+               expandNew.classList.add('expand-new')
+
+               // Create expand button for Important Task
+               let expandImportant = document.createElement('button')
+               expandImportant.classList.add('expand-important')               
 
                // Call task DOM elements
                let importantTask = document.createElement('div') // Stays
@@ -82,9 +95,12 @@ class Task {
                 newTask.appendChild(newDueDate)
                 newTask.appendChild(newDescription)
                 newTask.append(switchGroup)
+                newTask.append(expandNew)
+
 
                 //Show Initial taskt title
                 // newTaskTitle.style.display = 'block'
+                newTaskTitle.classList.remove('removed-element')
                 newTaskTitle.classList.add('visible-element')
 
                 // Hide extended elements
@@ -98,120 +114,175 @@ class Task {
 
                 // Hide Important Task
                 // importantTask.style.display = 'none'
+                importantTask.classList.remove('important-task')
                 importantTask.classList.add('removed-task')
 
 
 
 
-                // Extend new task
-                    newTask.addEventListener('click', function (){
+                // Extend and hide new task DONE
+                expandNew.addEventListener('click', function (){
                         // If is closed
-                        if (newDescription.style.display='none' || newDescription === null){
+                        if (newTask.classList.contains('new-task-shrinked')){
 
-                            console.log('click expand');
-                            newTask.style.backgroundColor = 'purple'
-                            newTask.appendChild(newDescription)
-                            newTask.append(switchGroup)
-                            // Show extended elements
-                            // newDescription.style.display='block' // Hide description
+                            console.log('expand new');
+
+                            // Expand new ask
+                            newTask.classList.remove('new-task-shrinked')
+                            newTask.classList.add('new-task')
+
+                            // Show task description
+                            newDescription.classList.remove('removed-element')
                             newDescription.classList.add('visible-element')
-                            // newDueDate.style.display='block' // Hide description
-                            newDueDate.classList.add('visible-element')
-                            // switchGroup.style.display='block'
+
+                            // Show switch button
+                            switchGroup.classList.remove('removed-element')
                             switchGroup.classList.add('visible-element')
 
+                            
+
                         // If is opened
-                        }else if(newDescription.classList.contains('visible-element')){
+                        }else if(newTask.classList.contains('new-task')){
 
-                            newTask.style.backgroundColor = 'pink'
+                            console.log('close new');
 
-                            // Hide extended elements
-                            // newDescription.style.display='none' // Hide description
+                            // Shrink new task
+                            newTask.classList.remove('new-task')
+                            newTask.classList.add('new-task-shrinked')
+
+                            // Hide task description
                             newDescription.classList.remove('visible-element')
                             newDescription.classList.add('removed-element')
-                            // switchGroup.style.display='none'
+
+                            // Hide Switch button
                             switchGroup.classList.remove('visible-element')
                             switchGroup.classList.add('removed-element')
+
                         };
                        
                         });
 
 
-                    // Extend Important Task elements
-                    importantTask.addEventListener('click', function(){
+                    // Extend and hide Important Task elements
+                    expandImportant.addEventListener('click', function(){
 
-                    importantTask.appendChild(newDescription)
-                    importantTask.append(switchGroup)
-    
-                    if (importantTask.style.display = 'grid'){
-                        // Show extended elements
-                        newTask.style.backgroundColor = 'orange'
-                        importantTask.style.backgroundColor = 'orange'
+                        console.log('expand important');
 
-                        // newDescription.style.display='block' // Hide description
-                        newDescription.classList.remove('removed-element')
-                        newDescription.classList.add('visible-element')
-                        // newDueDate.style.display='block' // Hide description
-                        newDueDate.classList.remove('removed-element')
-                        newDueDate.classList.add('visible-element')
-                        // switchGroup.style.display='block'
-                        switchGroup.classList.remove('removed-element')
-                        switchGroup.classList.add('visible-element')
+                        // If important is closed
+                        if (importantTask.classList.contains('important-task-shrinked')){
 
-                    // Important Task is Opened
-                    }else if(newDescription.classList.contains('visible-element')){
-                        // Hide extended elements
-                        newTask.style.backgroundColor = 'red'
+                            // Open important task
+                            importantTask.classList.remove('important-task-shrinked')
+                            importantTask.classList.add('important-task')
 
-                        // newDescription.style.display='none' // Hide description
-                        newDescription.classList.remove('visible-element')
-                        newDescription.classList.add('removed-element')
-                        // switchGroup.style.display='none'
-                        switchGroup.classList.remove('visible-element')
-                        switchGroup.classList.add('removed-element')
-                    };
-    
+                            // Show description
+                            newDescription.classList.remove('removed-element')
+                            newDescription.classList.add('visible-element')
+
+                            // Show switch button
+                            switchGroup.classList.remove('removed-element')
+                            switchGroup.classList.add('visible-element')
+
+                        // If important is Opened
+                        }else if(importantTask.classList.contains('important-task')){
+
+                            console.log('close important');
+
+                            // Shrink important task
+                            importantTask.classList.remove('important-task')
+                            importantTask.classList.add('important-task-shrinked')
+
+                            newTask.style.backgroundColor = 'red'
+
+                            // Hide description
+                            newDescription.classList.remove('visible-element')
+                            newDescription.classList.add('removed-element')
+
+                            // Hide switch button
+                            switchGroup.classList.remove('visible-element')
+                            switchGroup.classList.add('removed-element')
+                        };
+        
                 });
                 
 
                     // Switch group 
                     switchGroup.addEventListener('click', function (){   
 
+                        // Switch to New Task
                         if(switchGroup.classList.contains('important')){
-                            console.log('Initial Task');
+
+                            console.log('Switch to New Task');
+                            console.log(tasks.length);
+                            console.log(tasks);
+
+                            expandImportant.classList.remove('expand-important')
+                            expandImportant.classList.add('removed-element')
+
+                            expandNew.classList.remove('removed-element')
+                            expandNew.classList.add('expand-new')
+
                             switchGroup.classList.remove('important')
                             switchGroup.classList.add('initial')
-                            switchGroup.remove()
-                            newDescription.remove()
-                            newTask.style.display = 'grid'
+
+                            switchGroup.classList.remove('visible-element')
+                            switchGroup.classList.add('removed-element')
+
                             importantTask.classList.remove('important-task')
+                            importantTask.classList.remove('important-task-shrinked')
                             importantTask.classList.add('removed-task')
-                            mainContainer.style.backgroundColor = 'blue'
-                            // importantTask.style.display = 'none'
+
+                            newTask.classList.remove('removed-task')
+                            newTask.classList.remove('new-task')
+                            newTask.classList.add('new-task-shrinked')
 
                             newTask.appendChild(newTitle)
+                            newTask.appendChild(newDescription)
                             newTask.appendChild(newDueDate)
                             newTask.appendChild(checkBox)
+                            newTask.append(switchGroup)
+                            newTask.append(expandImportant)
 
+                            newDescription.classList.remove('visible-element')
+                            newDescription.classList.add('removed-element')
+                            
+                            //Switch to Important Task
                         }else if(switchGroup.classList.contains('initial')){
-                            mainContainer.style.backgroundColor = 'green'
-                            console.log('Important Task');
-                            important.push(tasks[i])
+
+
+                            console.log('Switched to Important Task');
+                            console.log(important.length);
                             console.log(important);
-                            console.log(important.length);  
+
+                            expandImportant.classList.remove('removed-element')
+                            expandImportant.classList.add('expand-important')
+
+                            expandNew.classList.remove('expand-new')
+                            expandNew.classList.add('removed-element')
+
                             switchGroup.classList.remove('initial')
                             switchGroup.classList.add('important')
-                            newTask.style.display = 'none'
+
+                            switchGroup.classList.remove('visible-element')
+                            switchGroup.classList.add('removed-element')
+
+                            newTask.classList.remove('new-task')
+                            newTask.classList.remove('new-task-shrinked')
                             newTask.classList.add('removed-task')
-                            importantTask.style.display = 'grid'
-                            importantTask.classList.add('important-task')
-                            // importantTitle.style.display = 'block'
-                            // Append new values to new task block
+
+                            importantTask.classList.remove('removed-task')
+                            importantTask.classList.remove('important-task')
+                            importantTask.classList.add('important-task-shrinked')
+
                             importantTask.appendChild(newTitle)
-                            // importantTask.appendChild(newDescription)
+                            importantTask.appendChild(newDescription)
                             importantTask.appendChild(newDueDate)
                             importantTask.appendChild(checkBox)
-                            // importantTask.append(switchGroup)
+                            importantTask.append(switchGroup)
+                            importantTask.append(expandImportant)
+
+                            newDescription.classList.remove('visible-element')
+                            newDescription.classList.add('removed-element')
 
                         }
                                
@@ -223,12 +294,14 @@ class Task {
                 if(checkBox.checked){
                     newTask.classList.add('checked-task')
                     importantTask.classList.add('checked-task')
-                    deletedTasks.push(tasks[i])
+                    // deletedTasks.push(tasks[i])
                     // newTask.remove()
                     // importantTask.remove()
                     console.log(`this is i ${i}`);
-                    console.log(tasks);
+                    // console.log(tasks);
+                    console.log(deletedTasks.length);
                     console.log(deletedTasks);
+
 
                     
                 }else{
