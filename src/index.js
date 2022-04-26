@@ -1,4 +1,7 @@
 import './style.css';
+import { compareAsc, format } from 'date-fns'
+
+
 
 // Initial arrays
 let tasks = [];
@@ -17,6 +20,8 @@ let importantContainer = document.querySelector('.important-container'); // Stay
 let importantTitle = document.querySelector('.important-container>h2')
 let secondaryContainer = document.querySelector('.secondary-container'); // Stays
 let newTaskTitle = document.querySelector('.initial-container>h2')
+importantTitle.innerText='Important Tasks'
+importantContainer.appendChild(importantTitle)
 
 // Initial class
 class Task {
@@ -44,45 +49,53 @@ class Task {
                 important.push(tasks[i])
                 deletedTasks.push(tasks[i])
 
-
                 // Create new taks from DOM
                 let newTask = document.createElement('div') // Stays
                 newTask.classList.add('new-task-shrinked') // Stays
                 initialContainer.appendChild(newTask) // Stays
         
                 // Create new values of each field
-               let newTitle = document.createElement('h2')
-               newTitle.classList.add('new-title')
-               let newDescription = document.createElement('p')
-               newDescription.classList.add('new-description')
-               let newDueDate = document.createElement('p')
-               newDueDate.classList.add('new-due-date')
+                let newTitle = document.createElement('h2')
+                newTitle.classList.add('new-title')
+                let newDescription = document.createElement('p')
+                newDescription.classList.add('new-description')
+                let newDueDate = document.createElement('p')
+                newDueDate.classList.add('new-due-date')
 
-               // Create checkbox
-               let checkBox = document.createElement('input');
-               checkBox.setAttribute('type', 'checkbox');
-               checkBox.classList.add('check-box')     
-               
-               // Create expand button for New Task
-               let expandNew = document.createElement('button')
-               expandNew.classList.add('expand-new')
+                // Create checkbox
+                let checkBox = document.createElement('input');
+                checkBox.setAttribute('type', 'checkbox');
+                checkBox.classList.add('check-box')     
+                
+                // Create expand button for New Task
+                let expandNew = document.createElement('button')
+                let expanNewImage = document.createElement('div')
+                expanNewImage.innerHTML = '<img src="../src/expand-image.svg" alt="expand-task">'
+                expanNewImage.classList.add('expand-new-image')
+                expandNew.appendChild(expanNewImage)
+                
+                expandNew.classList.add('expand-new')
 
-               // Create expand button for Important Task
-               let expandImportant = document.createElement('button')
-               expandImportant.classList.add('expand-important')               
+                // Create expand button for Important Task
+                let expandImportant = document.createElement('button')
+                expandImportant.classList.add('expand-important')         
+                let expandImportantImage = document.createElement('div')
+                expandImportantImage.innerHTML = '<img src="../src/expand-image.svg" alt="expand-task">'
+                expandImportantImage.classList.add('expand-important-image')
+                expandImportant.appendChild(expandImportantImage)
+                
+                // Call task DOM elements
+                let importantTask = document.createElement('div') // Stays
+                importantTask.classList.add('important-task') // Stays
+                mainContainer.appendChild(importantContainer)
 
-               // Call task DOM elements
-               let importantTask = document.createElement('div') // Stays
-               importantTask.classList.add('important-task') // Stays
-               mainContainer.appendChild(importantContainer)
-               importantContainer.appendChild(importantTask) // Stays
+                importantContainer.appendChild(importantTask) // Stays
 
                 // Switch Group Button
                 let switchGroup = document.createElement('button')
                 switchGroup.setAttribute('id', 'switch-group')
-                switchGroup.innerText = 'Switch Group'
+                switchGroup.innerText = 'Change Group'
                 switchGroup.classList.add('initial')
-
         
                 // Assign input values to each element
                 newTitle.innerText = title;
@@ -97,7 +110,6 @@ class Task {
                 newTask.append(switchGroup)
                 newTask.append(expandNew)
 
-
                 //Show Initial taskt title
                 // newTaskTitle.style.display = 'block'
                 newTaskTitle.classList.remove('removed-element')
@@ -111,14 +123,10 @@ class Task {
                 switchGroup.classList.remove('visible-element')
                 switchGroup.classList.add('removed-element')
 
-
                 // Hide Important Task
                 // importantTask.style.display = 'none'
                 importantTask.classList.remove('important-task')
                 importantTask.classList.add('removed-task')
-
-
-
 
                 // Extend and hide new task DONE
                 expandNew.addEventListener('click', function (){
@@ -139,8 +147,6 @@ class Task {
                             switchGroup.classList.remove('removed-element')
                             switchGroup.classList.add('visible-element')
 
-                            
-
                         // If is opened
                         }else if(newTask.classList.contains('new-task')){
 
@@ -157,11 +163,9 @@ class Task {
                             // Hide Switch button
                             switchGroup.classList.remove('visible-element')
                             switchGroup.classList.add('removed-element')
-
                         };
                        
                         });
-
 
                     // Extend and hide Important Task elements
                     expandImportant.addEventListener('click', function(){
@@ -192,7 +196,7 @@ class Task {
                             importantTask.classList.remove('important-task')
                             importantTask.classList.add('important-task-shrinked')
 
-                            newTask.style.backgroundColor = 'red'
+                            // newTask.style.backgroundColor = 'red'
 
                             // Hide description
                             newDescription.classList.remove('visible-element')
@@ -205,7 +209,6 @@ class Task {
         
                 });
                 
-
                     // Switch group 
                     switchGroup.addEventListener('click', function (){   
 
@@ -249,7 +252,6 @@ class Task {
                             //Switch to Important Task
                         }else if(switchGroup.classList.contains('initial')){
 
-
                             console.log('Switched to Important Task');
                             console.log(important.length);
                             console.log(important);
@@ -283,31 +285,47 @@ class Task {
 
                             newDescription.classList.remove('visible-element')
                             newDescription.classList.add('removed-element')
-
                         }
-                               
-        
                     })
 
                // Remove task functionality (checkbox)
                checkBox.addEventListener('click', function(){
-                if(checkBox.checked){
+
+                if(checkBox.checked && newTask.classList.contains('new-task') || newTask.classList.contains('new-task-shrinked')){
+                    newTask.classList.remove('new-task')
+                    newTask.classList.remove('new-task-shrinked')
+                    newDescription.classList.remove('visible-element')
+                    newDescription.classList.add('removed-element')
+                    expandNew.classList.remove('expand-new')
+                    expandNew.classList.add('removed-element')
                     newTask.classList.add('checked-task')
+                    switchGroup.classList.remove('visible-element')
+                    switchGroup.classList.add('removed-element')
+
+                    console.log(`this is i ${i}`);
+                    // console.log(tasks);
+                    console.log(deletedTasks.length);
+                    console.log(deletedTasks);
+                    
+                }else if(checkBox.checked && importantTask.classList.contains('important-task') || importantTask.classList.contains('important-task-shrinked')){
+
+                    importantTask.classList.remove('important-task')
+                    importantTask.classList.remove('important-task-shrinked')
+                    newDescription.classList.remove('visible-element')
+                    newDescription.classList.add('removed-element')
+                    expandImportant.classList.remove('expand-important')
+                    expandImportant.classList.add('removed-element')
                     importantTask.classList.add('checked-task')
-                    // deletedTasks.push(tasks[i])
-                    // newTask.remove()
-                    // importantTask.remove()
+                    switchGroup.classList.remove('visible-element')
+                    switchGroup.classList.add('removed-element')
                     console.log(`this is i ${i}`);
                     // console.log(tasks);
                     console.log(deletedTasks.length);
                     console.log(deletedTasks);
 
-
-                    
                 }else{
                     console.log('Not checked bitch');
                     newTask.classList.add('unchecked-task')
-
                 }
                })
 
@@ -315,7 +333,6 @@ class Task {
                 document.getElementById('title-value').value = ''
                 document.getElementById('description-value').value = ''
                 document.getElementById('date-value').value = ''
-
         }
 
         // Hide task prompt
