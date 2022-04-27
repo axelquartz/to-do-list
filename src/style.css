@@ -41,23 +41,64 @@
     text-align: center;
     justify-content: center;
 }
-input{
+#title-value{
     margin: 0px 0;
     border: solid 2px;
     border-radius: 5px;
     font-family: helvetica;
-    width: 250px;
+    width: 270px;
     height: 20px;
 }
+.due-date{
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+}
+#date-day{
+    width: 80px;
+    height: 20px;
+    border: solid 2px black;
+    border-radius: 5px;
+
+}
+.date-day{
+    width: 80px;
+    height: 20px;   
+    margin: 10px;
+}
+#date-month{
+    width: 80px;
+    height: 20px;
+    border: solid 2px black;
+    border-radius: 5px;
+}
+.date-month{
+    width: 80px;
+    height: 20px;  
+    margin: 10px; 
+}
+#date-year{
+    width: 80px;
+    height: 20px;
+    border: solid 2px black;
+    border-radius: 5px;
+}
+.date-year{
+    width: 80px;
+    height: 20px;   
+    margin: 10px;
+}
+
 textarea{
     border: solid 2px;
     border-radius: 5px;
     font-family: helvetica;
-    width: 250px;
+    width: 270px;
 }
 label{
     margin: 0px 0;
 }
+
 #entry{
     margin: 20px 0;
     display: grid;
@@ -291,19 +332,59 @@ p{
         text-align: center;
         justify-content: center;
     }
-    input{
+    #title-value{
         margin: 0px 0;
         border: solid 2px;
         border-radius: 5px;
         font-family: helvetica;
-        width: 250px;
+        width: 270px;
         height: 20px;
     }
+    .due-date{
+        background-color: yellow;
+        display: flex;
+        justify-content: center;
+    }
+    #date-day{
+        width: 80px;
+        height: 20px;
+        border: solid 2px black;
+        border-radius: 5px;
+    
+    }
+    .date-day{
+        width: 80px;
+        height: 20px;   
+        margin: 10px;
+    }
+    #date-month{
+        width: 80px;
+        height: 20px;
+        border: solid 2px black;
+        border-radius: 5px;
+    }
+    .date-month{
+        width: 80px;
+        height: 20px;  
+        margin: 10px; 
+    }
+    #date-year{
+        width: 80px;
+        height: 20px;
+        border: solid 2px black;
+        border-radius: 5px;
+    }
+    .date-year{
+        width: 80px;
+        height: 20px;   
+        margin: 10px;
+    }
+    
     textarea{
         border: solid 2px;
         border-radius: 5px;
         font-family: helvetica;
-        width: 250px;
+        width: 270px;
     }
     label{
         margin: 0px 0;

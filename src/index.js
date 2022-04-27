@@ -2,12 +2,17 @@ import './style.css';
 import { compareAsc, format } from 'date-fns'
 
 
-
 // Initial arrays
 let tasks = [];
+Object.assign({tasks})
+
 let deletedTasks = [];
+Object.assign({deletedTasks})
+
 let important = new Array();
 important.name = 'important'
+Object.assign({important})
+
 
 // Array names
 tasks.name = 'tasks'
@@ -35,7 +40,10 @@ class Task {
         // Define values
         title = document.getElementById('title-value').value;
         description = document.getElementById('description-value').value;
-        dueDate = document.getElementById('date-value').value;
+        let dateDay = document.getElementById('date-day').value
+        let dateMonth = document.getElementById('date-month').value
+        let dateYear = document.getElementById('date-year').value
+        dueDate = format(new Date(), dateDay + '/' + dateMonth + '/' + dateYear);;
         
         // Push user values to array
         let currentTask = new Task(title, description, dueDate)
@@ -43,6 +51,8 @@ class Task {
         
         console.log(tasks);
         console.log(tasks.length);
+        console.log(dueDate);
+
 
         for(let i = tasks.length - 1; i != tasks.length; i++){
 
@@ -62,11 +72,17 @@ class Task {
                 let newDueDate = document.createElement('p')
                 newDueDate.classList.add('new-due-date')
 
+
+                localStorage.setItem('title', title);
+                localStorage.getItem('title')
+        
+                alert(title)
+
                 // Create checkbox
                 let checkBox = document.createElement('input');
                 checkBox.setAttribute('type', 'checkbox');
                 checkBox.classList.add('check-box')     
-                
+                '2020/01/01'
                 // Create expand button for New Task
                 let expandNew = document.createElement('button')
                 let expanNewImage = document.createElement('div')
@@ -332,13 +348,19 @@ class Task {
                 // Clean input fields
                 document.getElementById('title-value').value = ''
                 document.getElementById('description-value').value = ''
-                document.getElementById('date-value').value = ''
+                // document.getElementById('date-value').value = ''
         }
+        
 
         // Hide task prompt
         let taskPrompt = document.querySelector('.task-prompt')
         taskPrompt.style.display = 'none'
     }
+
+
+        
+   
+    
 }
 
 // Display task prompt
