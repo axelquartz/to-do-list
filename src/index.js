@@ -18,6 +18,8 @@ Object.assign({important})
 tasks.name = 'tasks'
 deletedTasks.name = 'deletedTasks'
 
+
+
 // Load all containers
 let mainContainer = document.querySelector('.main-container'); // Stays
 let initialContainer = document.querySelector('.initial-container'); // Stays
@@ -73,11 +75,6 @@ class Task {
                 newDueDate.classList.add('new-due-date')
 
 
-                localStorage.setItem('title', title);
-                localStorage.getItem('title')
-        
-                alert(title)
-
                 // Create checkbox
                 let checkBox = document.createElement('input');
                 checkBox.setAttribute('type', 'checkbox');
@@ -113,10 +110,13 @@ class Task {
                 switchGroup.innerText = 'Change Group'
                 switchGroup.classList.add('initial')
         
-                // Assign input values to each element
-                newTitle.innerText = title;
+                
+                newTitle.innerText = title                
                 newDescription.innerText = description;
                 newDueDate.innerText = dueDate;
+
+                // document.querySelector('.title-text').innerText = localStorage.title;
+
         
                 // Append new values to new task block
                 newTask.appendChild(checkBox)
@@ -265,7 +265,7 @@ class Task {
                             newDescription.classList.remove('visible-element')
                             newDescription.classList.add('removed-element')
                             
-                            //Switch to Important Task
+                        //Switch to Important Task
                         }else if(switchGroup.classList.contains('initial')){
 
                             console.log('Switched to Important Task');
@@ -349,19 +349,52 @@ class Task {
                 document.getElementById('title-value').value = ''
                 document.getElementById('description-value').value = ''
                 // document.getElementById('date-value').value = ''
+
+
         }
         
 
         // Hide task prompt
         let taskPrompt = document.querySelector('.task-prompt')
         taskPrompt.style.display = 'none'
+
     }
 
-
-        
-   
-    
 }
+
+//Testing LocalStorage
+
+
+
+// localStorage.setItem('title', this.title);
+//                 localStorage.setItem('description', Task.description);
+//                 localStorage.setItem('dueDate', Task.dueDate);
+
+                
+//                 let keyTitle = localStorage.getItem('title')
+//                 let keyDescription = localStorage.getItem('description')
+//                 let keyDueDate = localStorage.getItem('dueDate')
+
+
+
+
+//                 if(localStorage.length == 3){
+
+//                     console.log(Task.newTitle)
+
+
+//                     let localTask = document.createElement('div') // Stays
+//                     localTask.classList.add('new-task-shrinked') // Stays
+//                     initialContainer.appendChild(localTask) // Stays
+//                     localTask.append(keyTitle)
+//                     localTask.append(keyDescription)
+//                     localTask.append(keyDueDate)
+//                 }
+
+                console.log(new Task().createTask());
+
+//Testing LocalStorage
+
 
 // Display task prompt
 function displayPrompt(){
