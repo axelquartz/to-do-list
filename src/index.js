@@ -1,7 +1,7 @@
 window.onload = function(){
 
     //Hide task prompt
-    let formTodo = document.querySelector('.formTodo');
+    let formTodo = document.querySelector('.form-todo');
     let createTaskButton = document.querySelector('.create-task')
     formTodo.style.display='none'
     

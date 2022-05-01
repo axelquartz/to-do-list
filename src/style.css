@@ -1,5 +1,22 @@
-*{
+:root{
     background-color: rgb(224, 224, 224);
+}
+.heading{
+    text-align: center;
+    margin: 50px;
+}
+.create-task-title{
+    text-align: center;
+    margin: 50px;
+
+}
+.create-task{
+    width: 200px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: 20px auto;
 }
 form{
     display: flex;
@@ -36,13 +53,12 @@ form{
     justify-items: flex-start;
     align-items: center;
     padding: 10px;
-    background-color: white;
-    margin: 5px 0;
+    background-color: rgb(255, 255, 255);
+    margin: 10px 0;
+    border-bottom: 4px solid greenyellow;
 }
 .item>p{
     margin: 30px 20px;
-    color: gray;
-    background-color: yellow;
 }
 .item>h2{
     margin: 30px 20px;
